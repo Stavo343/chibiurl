@@ -1,18 +1,18 @@
-const express = require('express');
-const path = require('path');
-const ejs = require('ejs');
-const mongoose = require('mongoose');
-const chibiurl = mongoose.connect(process.env.MONGOLAB_URI);
-const chibiurlSchema = new mongoose.Schema({
+var express = require('express');
+var path = require('path');
+var ejs = require('ejs');
+var mongoose = require('mongoose');
+var chibiurl = mongoose.connect(process.env.MONGOLAB_URI);
+var chibiurlSchema = new mongoose.Schema({
   url: String,
   chibi: String,
   extension: Number
 });
 //Thanks to odysseas for his great valid-url module! More information at https://www.npmjs.com/package/valid-url
-const validUrl = require('valid-url');
-const app = express();
-const chibiurlModel = chibiurl.model('chibiurl', chibiurlSchema);
-let arg;
+var validUrl = require('valid-url');
+var app = express();
+var chibiurlModel = chibiurl.model('chibiurl', chibiurlSchema);
+var arg;
 
 mongoose.Promise = global.Promise;
 
@@ -66,5 +66,5 @@ function notValid(res, arg) {
   });
 }
 
-app.listen(process.env.PORT, function() {
+app.listen(process.env.PORT || 1337, function() {
 });
